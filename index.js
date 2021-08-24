@@ -21,15 +21,32 @@ const app = express()
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
 app.post('/callback', line.middleware(config), (req, res) => {
-  // Promise.all(req.body.events.map(handleEvent))
-  //   .then((result) => res.json(result))
-  //   .catch((err) => {
-  //     console.error(err)
-  //     res.status(500).end()
-  //   })
+  Promise.all(req.body.events.map(handleEvent))
+    .then((result) => res.json(result))
+    .catch((err) => {
+      console.error(err)
+      res.status(500).end()
+    })
   console.log(req)
 })
-
+app.use('/api/send-notify', (req, res) => {
+  // console.log('req', req.body)
+  const textData = Object.keys(req.body).toString()
+  console.log(textData)
+  // axios({
+  //   method: "post",
+  //   url: "https://notify-api.line.me/api/notify",
+  //   headers: {
+  //     Authorization: "Bearer Wv6BxfBndxJjDBShK88fuswUUJMybpoJzfJkbPa77zp",
+  //     "Content-Type": "application/x-www-form-urlencoded",
+  //   },
+  //   data: queryString.stringify({
+  //     message: textData,
+  //   }),
+  // }).then((data) => {
+  //  console.log(data)
+  // })
+}),
 app.post('/send-message', line.middleware(config), (req, res) => {
   const textData = Object.keys(req.body).toString()
   console.log(textData)
