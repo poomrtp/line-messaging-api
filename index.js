@@ -22,14 +22,14 @@ const app = express()
 // about the middleware, please refer to doc
 app.post('/callback', line.middleware(config), (req, res) => {
   console.log(req)
-  Promise.all(req.body.events.map(handleEvent))
-    .then((result) => res.json(result))
-    .catch((err) => {
-      console.error(err)
-      res.status(500).end()
-    })
+  // Promise.all(req.body.events.map(handleEvent))
+  //   .then((result) => res.json(result))
+  //   .catch((err) => {
+  //     console.error(err)
+  //     res.status(500).end()
+  //   })
 })
-app.use('/api/send-notify', (req, res) => {
+app.post('/api/send-notify', (req, res) => {
   // console.log('req', req.body)
   const textData = Object.keys(req.body).toString()
   console.log(textData)
