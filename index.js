@@ -2,6 +2,7 @@
 
 const line = require('@line/bot-sdk')
 const express = require('express')
+const axios = require('axios')
 
 // create LINE SDK config from env variables
 const config = {
@@ -69,3 +70,4 @@ const port = process.env.PORT || 3000
 app.listen(port, () => {
   console.log(`listening on ${port}`)
 })
+module.exports = app
