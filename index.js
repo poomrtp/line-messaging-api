@@ -28,7 +28,6 @@ app.post('/callback', line.middleware(config), (req, res) => {
       console.error(err)
       res.status(500).end()
     })
-  // console.log(req)
 })
 app.use('/api/send-notify', (req, res) => {
   // console.log('req', req.body)
@@ -72,6 +71,7 @@ app.post('/send-message', line.middleware(config), (req, res) => {
 
 // event handler
 function handleEvent(event) {
+  console.log(event)
   if (event.type !== 'message' || event.message.type !== 'text') {
     // ignore non-text-message event
     return Promise.resolve(null)
