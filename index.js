@@ -19,6 +19,10 @@ const client = new line.Client({
   channelAccessToken: channelAccessToken,
 });
 
+app.get("/health-check", async (req, res) => {
+  res.status(200).json({ message: "Hello" });
+});
+
 app.post("/send-message", async (req, res) => {
   console.log(req.body);
   const broadcastRes = await client.broadcast({
